@@ -8,4 +8,4 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 
 ## Class notes, resources, and assignments
 
-* [Week 1](Week 1) (10/16)
+* [Week 1](https://github.com/bucksphp/bucksphp/wiki/Week-1) (10/16)
