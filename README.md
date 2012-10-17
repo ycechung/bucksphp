@@ -10,4 +10,8 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 
 * [Week 1](https://github.com/bucksphp/bucksphp/wiki/Week-1) (10/16)
 
-## Email me, please: ken@37i.net
+## Current homework
+
+Register your domain, set up your web hosting, and email your project plan to ken@37i.net.
+
+Also, create a GitHub account if you haven't yet.
