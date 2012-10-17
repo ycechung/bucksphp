@@ -12,6 +12,6 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 
 ## Current homework
 
-Register your domain, set up your web hosting, and email your project plan to ken@37i.net.
+Register your domain, [set up your web hosting](https://github.com/bucksphp/bucksphp/wiki/Recommended-Hosting-Providers), and email your project plan to ken@37i.net.
 
 Also, create a GitHub account if you haven't yet.
