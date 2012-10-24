@@ -1,5 +1,11 @@
 <?php
 
+/*
+
+This file contains a multidimensional array of products that we're using as the data source for our store
+
+*/
+
 $products = array(
 	array(
 		'name' => 'Walrus T-Shirt',
