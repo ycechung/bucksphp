@@ -1,88 +1,18 @@
 <?php
 
-$products = array(
-	array(
-		'name' => 'Walrus T-Shirt',
-		'description' => 'Lorem ipsum adipisicing sint consequat do veniam ea. Lorem ipsum dolore sit eu dolore ut est eiusmod.',
-		'image' => 'http://www.cottonable.com/wp-content/uploads/2010/01/walrus-cartoon-tee-t-shirt-animal-illustration-apparel-clothing-mustache-fuzzy-ink-men.jpg',
-		'price' => 12.0,
-		'sizes' => array(
-			'Small',
-			'Medium',
-			'Large',
-			'XL',
-			'2XL'
-		),
-	),
-	array(
-		'name' => 'Dolphin T-Shirt',
-		'description' => 'Lorem ipsum adipisicing sint consequat do veniam ea. Lorem ipsum dolore sit eu dolore ut est eiusmod.',
-		'image' => 'http://www.animalshirts.net/dolphinshirts/10-3081.jpg',
-		'price' => 13.50,
-		'sizes' => array(
-			'Small',
-			'Medium',
-			'Large',
-			'XL'
-		)
-	),
-	array(
-		'name' => 'Angry Leopard Seal',
-		'description' => 'Lorem ipsum adipisicing sint consequat do veniam ea. Lorem ipsum dolore sit eu dolore ut est eiusmod.',
-		'image' => 'http://rlv.zcache.com/leopard_seal_vs_penguin_battle_tshirt-p235094727998853049z7of7_210.jpg',
-		'price' => 12,
-		'sizes' => array(
-			'Small',
-			'Medium',
-			'Large',
-			'XL'
-		)
-	),
-	array(
-		'name' => 'Harry Otter Tee',
-		'description' => 'Lorem ipsum adipisicing sint consequat do veniam ea. Lorem ipsum dolore sit eu dolore ut est eiusmod.',
-		'image' => 'http://2.bp.blogspot.com/-dYqVW-0sjaE/T7uM4QzX-HI/AAAAAAAAEew/M_PcTjVjT_U/s640/Harry+Otter.jpg',
-		'price' => '14.99',
-		'sizes' => array(
-			'Youth Large',
-			'Small',
-			'Medium',
-			'Large',
-			'XL'
-		)
-	),
-	array(
-		'name' => 'Polar Bear Hoodie',
-		'description' => 'Lorem ipsum adipisicing sint consequat do veniam ea. Lorem ipsum dolore sit eu dolore ut est eiusmod.',
-		'image' => 'http://www.toxel.com/wp-content/uploads/2009/07/hoodie06.jpg',
-		'price' => 34.99,
-		'sizes' => array(
-			'Small',
-			'Medium',
-			'Large',
-		)
-	),
-	array(
-		'name' => 'Porpoise Pun Tee',
-		'description' => 'Lorem ipsum adipisicing sint consequat do veniam ea. Lorem ipsum dolore sit eu dolore ut est eiusmod.',
-		'image' => 'http://skreened.com/render-product/r/u/a/ruacboqgyfiugvwqfqas/for-all-intensive-porpoises-t-shirt.american-apparel-juniors-fitted-tee.light-blue.w760h760.jpg',
-		'price' => 16,
-		'sizes' => array(
-			'Small',
-			'Medium',
-			'Large',
-			'XL',
-			'2XL',
-			'3XL'
-		)
-	),	
-);
+// include the product list
+require 'products.php';
 
 // a prettier version of print_r()
 function pre($array) {
 	echo '<pre>';
 	print_r($array);
 	echo '</pre>';
+}
+
+// shorter version of htmlentities
+function h($str){
+	return htmlentities($str);
 }
 
 ?>
@@ -93,15 +23,27 @@ function pre($array) {
 		<title>Dolphinitively Tees - The Finest in Marine Mammal Apparel</title>
 		<meta http-equiv="content-type" content="text/html;charset=utf-8">
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-		<style type="text/css">
-		body {
-			padding-top: 40px;
-		}
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				// validate that a size has been selected
+				$('form.buy').submit(function(e){
+					if ( $(this).find('select.size').val() == '' ) {
+						alert("Please select a size!");
+						return false;
+					}
+				});
 
-		.thumbnails img {
-			height: 200px;
-		}
-		</style>
+				// normalize height of thumbnails
+				var h = 0;
+				$('.thumbnail').each(function(i, div){
+					if ( $(div).height() > h ) {
+						h = $(div).height();
+					}
+				}).height(h);
+			});
+		</script>
 	</head>
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top">
@@ -123,12 +65,37 @@ function pre($array) {
 				<?php foreach ( $products as $product ): ?>
 					<li class="span4">
 						<div class="thumbnail">
-							<img src="<?= $product['image'] ?>" alt="Photo of <?= $product['name'] ?>">
+							<?php if ( $product['image'] ): ?>
+								<img src="<?= h($product['image']) ?>" alt="Photo of <?= h($product['name']) ?>">
+							<?php else: ?>
+								<img src="http://placehold.it/200x200" alt="No Photo">
+							<?php endif; ?>
 
 							<div class="caption">
-								<h3><?php echo $product['name'] ?></h3>
-								<p><?= $product['description'] ?></p>
-								<p><button type="submit" class="btn btn-primary">Buy</button></p>
+								<h3><?php echo h($product['name']) ?></h3>
+								<h4>$<?= number_format($product['price'], 2) ?></h4>
+								<p><?= nl2br(h($product['description'])) ?></p>
+
+								<form class="buy" name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+									<input type="hidden" name="cmd" value="_xclick">
+									<input type="hidden" name="business" value="ken@37i.net">
+									<input type="hidden" name="currency_code" value="USD">
+									<input type="hidden" name="item_name" value="<?= h($product['name']) ?>">
+									<input type="hidden" name="amount" value="<?= h($product['price']) ?>">
+									<input type="hidden" name="on0" value="Size">
+									
+						
+									<select class="size" name="os0">
+										<option value="">Select a size...</option>
+										<?php foreach ( $product['sizes'] as $size ): ?>
+											<option value="<?= h($size) ?>"><?= h($size) ?></option>
+										<?php endforeach; ?>
+									</select>
+
+									<p>
+										<button type="submit" class="btn btn-primary">Buy</button>
+									</p>
+								</form>
 							</div>
 						</div>
 					</li>
