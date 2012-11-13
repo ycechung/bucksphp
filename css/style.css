@@ -2,6 +2,10 @@ body {
 	padding-top: 40px;
 }
 
+.navbar-fixed-top a.brand {
+  margin-left: -5px;
+}
+
 .thumbnails img {
 	height: 200px;
 }
