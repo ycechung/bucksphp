@@ -11,6 +11,7 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 * [Class Calendar](https://www.google.com/calendar/embed?src=2bg0f7rg6g4mq54eu6ecbdo29c%40group.calendar.google.com&ctz=America/New_York)
 * [Week 1](https://github.com/bucksphp/bucksphp/wiki/Week-1) (10/16)
 * [Week 2](https://github.com/bucksphp/bucksphp/wiki/Week-2) (10/23)
+* [Week 3](https://github.com/bucksphp/bucksphp/wiki/Week-3) (11/13)
 
 ---
 If you have any questions or comments, please don't hesitate to email ken@37i.net.
