@@ -9,3 +9,9 @@ body {
 .thumbnails img {
 	height: 200px;
 }
+
+.img-polaroid {
+	max-width: 400px;
+	float: left;
+	margin-right: 40px;
+}
