@@ -35,6 +35,12 @@ function tab_class($tab) {
 	}
 }
 
+function sanitize_mail_headers($str) {
+  $badness = array("\r", "\n", "%0a", "%0d", "Content-Type", "bcc:", "to:", "cc:");
+
+  return str_ireplace($badness, '', $str);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +67,13 @@ function tab_class($tab) {
 						alert("Please select a size!");
 						return false;
 					}
+				});
+
+				$('form.buy select.size').change(function(e){
+					var diff = $(this).find('option:selected').data('price-difference');
+					var base_price = parseFloat($('#base_price').val());
+					var total = diff + base_price;
+					$('#paypal_amount').val(total);
 				});
 			});
 		</script>

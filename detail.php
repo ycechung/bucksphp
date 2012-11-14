@@ -15,6 +15,11 @@ $product = $products[$_GET['id']];
 	<h1><?= h($product['name']) ?></h1>
 </div>
 
+<ul class="breadcrumb">
+  <li><a href="index.php">All Products</a> <span class="divider">/</span></li>
+  <li class="active"><?= h($product['name']) ?></li>
+</ul>
+
 <?= product_image_tag($product, 'img-polaroid'); ?>
 
 <?php // format the price to 2 decimal points ?>
@@ -29,15 +34,21 @@ $product = $products[$_GET['id']];
 	<input type="hidden" name="business" value="bucksphp@gmail.com">
 	<input type="hidden" name="currency_code" value="USD">
 	<input type="hidden" name="item_name" value="<?= h($product['name']) ?>">
-	<input type="hidden" name="amount" value="<?= h($product['price']) ?>">
+	<input type="hidden" id="paypal_amount" name="amount" value="<?= h($product['price']) ?>">
 	<input type="hidden" name="on0" value="Size">
+	<input type="hidden" id="base_price" value="<?= h($product['price']) ?>">
 	
 
 	<?php // Print a select field with all available sizes ?>
 	<select class="size" name="os0">
 		<option value="">Select a size...</option>
-		<?php foreach ( $product['sizes'] as $size ): ?>
-			<option value="<?= h($size) ?>"><?= h($size) ?></option>
+		<?php foreach ( $product['sizes'] as $size => $price_difference ): ?>
+			<option value="<?= h($size) ?>" data-price-difference="<?= $price_difference ?>">
+				<?= h($size) ?>
+				<?php if ( $price_difference ): ?>
+					($<?= number_format($price_difference, 2) ?>)
+				<?php endif; ?>
+			</option>
 		<?php endforeach; ?>
 	</select>
 
