@@ -70,6 +70,9 @@ function sanitize_mail_headers($str) {
   return str_ireplace($badness, '', $str);
 }
 
+// Start up session handling
+session_start();
+
 // Now print the opening HTML...
 
 ?>
@@ -120,6 +123,7 @@ function sanitize_mail_headers($str) {
 		      <li class="<?= tab_class('index') ?>"><a href="index.php">Home</a></li>
 		      <li class="<?= tab_class('contact') ?>"><a href="contact.php">Contact</a></li>
 		      <li class="<?= tab_class('about') ?>"><a href="about.php">About Us</a></li>
+  		      <li class="<?= tab_class('cart') ?>"><a href="cart.php">Shopping Cart</a></li>
 		    </ul>
 		  </div>
 		</div>
