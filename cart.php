@@ -198,3 +198,5 @@ elseif ( $action == 'thank' ) {
 <?php else: ?>
 	<p class="none">No products in your cart :(</p>
 <?php endif; ?>
+
+<?php require 'footer.php'; // include footer HTML ?>
