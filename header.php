@@ -3,6 +3,14 @@
 // include the product list (or die trying)
 require 'products.php';
 
+// Start up session handling
+session_start();
+
+// if the session variable "cart" doesn't exist, set it to an empty array
+if ( !isset($_SESSION['cart']) ) {
+	$_SESSION['cart'] = array();
+}
+
 /**
  *  A prettier version of print_r()
  *
@@ -57,7 +65,6 @@ function tab_class($tab) {
 	}
 }
 
-
 /**
  * Removes all potential spam headers from a string
  *
@@ -70,8 +77,84 @@ function sanitize_mail_headers($str) {
   return str_ireplace($badness, '', $str);
 }
 
-// Start up session handling
-session_start();
+/**
+ * Add a product to the user's shopping cart
+ *
+ * @param int $product_id - The product's index in the global $products array
+ * @param string $size - The size of the product being added
+ * @param int $qty - The quantity to add. Defaults to 1
+ * @return boolean
+ **/
+function add_to_cart($product_id, $size, $qty=1) {
+	// this lets us use the global products array within the scope of our function
+	global $products;
+
+	// if any of the input parameters are invalid, return false to indicate failure
+	if ( is_null($product_id) || is_null($size) || $qty < 1 ) {
+		return false;
+	}
+
+	// select the relevant product from the global products array
+	$product = $products[$product_id];
+
+	// create a unique indifier for this product and size
+	$unique_id = $product_id . $size;
+
+	// if this unique item isn't in the cart yet...
+	if ( !isset($_SESSION['cart'][$unique_id]) ) {
+		// the price difference for this size
+		$size_price = $product['sizes'][$size];
+
+		// add a line item to the cart
+		$_SESSION['cart'][$unique_id] = array(
+			'product_id' => $product_id,
+			'product' => $product,
+			'size' => $size,
+			// the price for this unique item (product base price + size price difference)
+			'price' => $product['price'] + $size_price,
+			'quantity' => $qty
+		);
+	}
+	// the given product and size combo was already in the cart, so we just
+	// need to update its quantity
+	else {
+		$_SESSION['cart'][$unique_id]['quantity'] += $qty;
+	}
+
+	// return true to indicate that the function worked
+	return true;
+}
+
+/**
+ * Calculate the total price of all items in the user's shopping cart
+ *
+ * @return float
+ **/
+function cart_total() {
+	$cart_total = 0;
+
+	foreach ( $_SESSION['cart'] as $item ) {
+		$subtotal = $item['quantity'] * $item['price'];
+		$cart_total += $subtotal;
+	}
+
+	return $cart_total;
+}
+
+/**
+ * Return the total number of items in the user's shopping cart
+ *
+ * @var int
+ **/
+function cart_item_count() {
+	$item_count = 0;
+
+	foreach ( $_SESSION['cart'] as $item ) {
+		$item_count += $item['quantity'];
+	}
+
+	return $item_count;
+}
 
 // Now print the opening HTML...
 
@@ -120,10 +203,18 @@ session_start();
 		    <a class="brand" href="index.php">Dolphinitively Tees</a>
 		    <ul class="nav">
 		    	<?php // Give the current tab the class "active", so we can highlight it with CSS ?>
-		      <li class="<?= tab_class('index') ?>"><a href="index.php">Home</a></li>
-		      <li class="<?= tab_class('contact') ?>"><a href="contact.php">Contact</a></li>
-		      <li class="<?= tab_class('about') ?>"><a href="about.php">About Us</a></li>
-  		      <li class="<?= tab_class('cart') ?>"><a href="cart.php">Shopping Cart</a></li>
+		      <li class="index <?= tab_class('index') ?>"><a href="index.php">Home</a></li>
+		      <li class="contact <?= tab_class('contact') ?>"><a href="contact.php">Contact</a></li>
+		      <li class="about <?= tab_class('about') ?>"><a href="about.php">About Us</a></li>
+		      <li class="cart <?= tab_class('cart') ?>">
+		      	<a href="cart.php">
+		      		Shopping Cart
+		      		<?php // If there are items in the shopping cart, print the total quantity with the shopping cart link ?>
+		      		<?php if ( cart_item_count() > 0 ): ?>
+		      			<sup><?= number_format(cart_item_count()) ?></sup>
+		      		<?php endif; ?>
+		      	</a>
+		     </li>
 		    </ul>
 		  </div>
 		</div>

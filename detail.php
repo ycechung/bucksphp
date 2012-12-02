@@ -37,8 +37,9 @@ $product = $products[$_GET['id']];
 <?php // Turn description line breaks into <br> tags ?>
 <p><?= nl2br(h($product['description'])) ?></p>
 
-
+<?php // The add to cart form ?>
 <form class="buy" action="cart.php?action=add" method="post">
+	<?php // Set the product id with a hidden input ?>
 	<input type="hidden" value="<?= h($_GET['id']) ?>" name="id">
 
 	<?php // Print a select field with all available sizes ?>
@@ -47,8 +48,7 @@ $product = $products[$_GET['id']];
 
 		<?php // Loop through each product size ?>
 		<?php foreach ( $product['sizes'] as $size => $price_difference ): ?>
-			<?php // Add a data attribute called "price-difference" to the option, so we can add it to the base price and get the total amount ?>
-			<option value="<?= h($size) ?>" data-price-difference="<?= h($price_difference) ?>">
+			<option value="<?= h($size) ?>">
 				<?= h($size) // print the size name ?>
 
 				<?php // the price difference is positive, put a + in front of it ?>
@@ -67,6 +67,5 @@ $product = $products[$_GET['id']];
 		<button class="btn btn-primary">Add to Cart</button>
 	</p>
 </form>
-
 
 <?php require 'footer.php'; // include footer HTML ?>

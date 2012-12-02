@@ -6,6 +6,15 @@ body {
   margin-left: -5px;
 }
 
+.navbar-fixed-top li.cart sup {
+  color: #fff;
+  background-color: #ff0000;
+  padding: 2px 4px;
+  text-shadow: 0 1px 0 #000;
+  margin-left: 1px;
+  border-radius: 2px;
+}
+
 .thumbnails img {
 	height: 200px;
 }
