@@ -25,7 +25,11 @@ body {
 	margin-right: 40px;
 }
 
-form#contact-form textarea {
+#contact-form textarea {
   width: 450px;
   height: 150px;
+}
+
+#paypal-checkout-form {
+  margin-top: -50px;
 }

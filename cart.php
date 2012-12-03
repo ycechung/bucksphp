@@ -170,7 +170,7 @@ elseif ( $action == 'thank' ) {
 	</form>
 
 	<?php // The Paypal upload cart form (see https://www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-outside) ?>
-	<form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" class="pull-right">
+	<form id="paypal-checkout-form" name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" class="pull-right">
 		<input type="hidden" name="cmd" value="_cart">
 		<input type="hidden" name="upload" value="1">
 		<input type="hidden" name="business" value="bucksphp@gmail.com">
@@ -186,7 +186,7 @@ elseif ( $action == 'thank' ) {
 		<?php endforeach; ?>
 
 		<p>
-			<button type="submit" class="btn btn-primary">Checkout</button>
+			<button type="submit" class="btn btn-primary btn-large">Checkout</button>
 		</p>
 	</form>
 
