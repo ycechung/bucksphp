@@ -13,6 +13,7 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 * [Week 2](https://github.com/bucksphp/bucksphp/wiki/Week-2) (10/23)
 * [Week 3](https://github.com/bucksphp/bucksphp/wiki/Week-3) (11/13)
 * [Week 4](https://github.com/bucksphp/bucksphp/wiki/Week-4) (11/27)
+* [Week 5](https://github.com/bucksphp/bucksphp/wiki/Week-5) (12/4)
 
 ---
 If you have any questions or comments, please don't hesitate to email ken@37i.net.
