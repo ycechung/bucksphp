@@ -215,6 +215,10 @@ function cart_item_count() {
 		      		<?php endif; ?>
 		      	</a>
 		     </li>
+		     <?php // Only show the logout link if a user is logged in ?>
+		     <?php if ( isset($_SESSION['user']) ): ?>
+		     	<li class="logout pull-right"><a href="logout.php">Log out</a></li>
+		     <?php endif; ?>
 		    </ul>
 		  </div>
 		</div>
