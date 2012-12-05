@@ -1,7 +1,7 @@
 <?php
 
 // our mysql connection info
-$user = 'bucksphps';
+$user = 'bucksphp';
 $password = 'fQ4fRD5CVFXmCw9F';
 $database = 'bucksphp_store';
 $host = 'localhost';
