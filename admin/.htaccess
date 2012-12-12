@@ -1,0 +1,6 @@
+AuthUserFile C:\xampp\htdocs\bucksphp\admin\.htpasswd
+AuthType Basic
+AuthName "Secret Stuff"
+Require valid-user
+
+Options -Indexes
