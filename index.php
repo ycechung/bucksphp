@@ -1,5 +1,17 @@
+<?php
 
-<?php require 'header.php'; // include header HTML and functions ?>
+require 'header.php'; // include header HTML and functions
+
+$sql = "SELECT * FROM products ORDER BY name";
+$result = $db->query($sql);
+
+$products = array();
+
+while ( $row = $result->fetch_assoc() ) {
+	$products[] = $row;
+}
+
+?>
 
 <div class="page-header">
 	<h1>All Products</h1>
@@ -8,9 +20,9 @@
 
 <ul class="thumbnails">
 	<?php // Loop through each product, print its thumbnail image, and link to the related detail page ?>
-	<?php foreach ( $products as $id => $product ): ?>
+	<?php foreach ( $products as $product ): ?>
 		<li class="span3">
-			<a class="thumbnail" href="detail.php?id=<?= $id ?>">
+			<a class="thumbnail" href="detail.php?id=<?= $product['id'] ?>">
 				<?php // Print the image tag for this product ?>
 				<?= product_image_tag($product); ?>
 			</a>

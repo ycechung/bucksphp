@@ -5,7 +5,7 @@ require 'header.php';
 
 // if ?id parameter isn't set or a product with the index of the id paramter doesn't
 // exist, redirect to the index page
-if ( !isset($_GET['id']) || !isset($products[$_GET['id']]) ) {
+if ( !isset($_GET['id']) || !$product = get_product($_GET['id']) ) {
 	// always call exit() after using the Location header, as the script will continue
 	// to execute even after the user has been redirected
 	// (also note that exit() is one of the weird php functions that doesn't require
@@ -13,9 +13,6 @@ if ( !isset($_GET['id']) || !isset($products[$_GET['id']]) ) {
 	header("Location: index.php");
 	exit;
 }
-
-// select the item from the products array with the index corresponding to the given id
-$product = $products[$_GET['id']];
 
 ?>
 

@@ -1,7 +1,16 @@
 <?php
 
-// include the product list (or die trying)
-require 'products.php';
+// environment-specific and sensitive information goes here
+require 'config.php';
+
+// connect to the mysql server
+$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+
+// if the connection fails, an error message will be set
+// check for that error message and kill the script if it exists
+if ( $db->connect_errno ) {
+	die("Failed to connect to database: " . $db->connect_error);
+}
 
 // Start up session handling
 session_start();
@@ -86,16 +95,13 @@ function sanitize_mail_headers($str) {
  * @return boolean
  **/
 function add_to_cart($product_id, $size, $qty=1) {
-	// this lets us use the global products array within the scope of our function
-	global $products;
-
 	// if any of the input parameters are invalid, return false to indicate failure
 	if ( is_null($product_id) || is_null($size) || $qty < 1 ) {
 		return false;
 	}
 
 	// select the relevant product from the global products array
-	$product = $products[$product_id];
+	$product = get_product($product_id);
 
 	// create a unique indifier for this product and size
 	$unique_id = $product_id . $size;
@@ -154,6 +160,30 @@ function cart_item_count() {
 	}
 
 	return $item_count;
+}
+
+function get_product($id) {
+	global $db;
+
+	$sql = 'SELECT * FROM products WHERE id = "' . $db->real_escape_string($id) . '"';
+	$result = $db->query($sql);
+
+	if ( $result->num_rows > 0 ) {
+		$product = $result->fetch_assoc();
+		$product['sizes'] = array();
+
+		$sql = 'SELECT * FROM sizes WHERE product_id = "' . $db->real_escape_string($id) . '" ORDER BY weight';
+		$result = $db->query($sql);
+
+		while ( $size = $result->fetch_assoc() ) {
+			$product['sizes'][$size['name']] = $size['price_difference'];
+		}
+
+		return $product;
+	}
+	else {
+		return false;
+	}
 }
 
 // Now print the opening HTML...
