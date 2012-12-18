@@ -100,8 +100,13 @@ function add_to_cart($product_id, $size, $qty=1) {
 		return false;
 	}
 
-	// select the relevant product from the global products array
+	// fetch the relevant product from the database
 	$product = get_product($product_id);
+
+	// if the product doesn't exist, return false
+	if ( !$product ) {
+		return false;
+	}
 
 	// create a unique indifier for this product and size
 	$unique_id = $product_id . $size;
@@ -150,7 +155,7 @@ function cart_total() {
 /**
  * Return the total number of items in the user's shopping cart
  *
- * @var int
+ * @return int
  **/
 function cart_item_count() {
 	$item_count = 0;
@@ -162,25 +167,40 @@ function cart_item_count() {
 	return $item_count;
 }
 
+/**
+ * Return a fully-formed product array for a given product ID
+ *
+ * @param int $id - The product record's ID
+ * @return array
+ **/
 function get_product($id) {
+	// we need to access the global $db variable
 	global $db;
 
+	// select the product row from the database, *making sure to escape the data with real_escape_string() before we send it to MySQL*
 	$sql = 'SELECT * FROM products WHERE id = "' . $db->real_escape_string($id) . '"';
 	$result = $db->query($sql);
 
+	// continue if rows are found
 	if ( $result->num_rows > 0 ) {
+		// store the product record in an associative array
 		$product = $result->fetch_assoc();
+		// add an empty sizes array to the product
 		$product['sizes'] = array();
 
+		// select all sizes for this product, ordering them by their weight attribute
 		$sql = 'SELECT * FROM sizes WHERE product_id = "' . $db->real_escape_string($id) . '" ORDER BY weight';
 		$result = $db->query($sql);
 
+		// add each size to the product's sizes array in the format we expect (Small => 0.00, 2XL => 1.00, etc.)
 		while ( $size = $result->fetch_assoc() ) {
 			$product['sizes'][$size['name']] = $size['price_difference'];
 		}
 
+		// return the product array
 		return $product;
 	}
+	// no product found. return false
 	else {
 		return false;
 	}
