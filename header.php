@@ -1,11 +1,7 @@
 <?php
 
 // environment-specific and sensitive information goes here
-// require '../config.php';
-define('DB_USER', 'bucksphp');
-define('DB_PASSWORD', 'fQ4fRD5CVFXmCw9F');
-define('DB_NAME', 'bucksphp_store');
-define('DB_HOST', 'localhost');
+require realpath(dirname(__FILE__)) . '/config.php';
 
 // connect to the mysql server
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -210,7 +206,7 @@ function get_product($id) {
 	}
 }
 
-function print_template($name, $vars=array(), $layout='admin') {
+function print_template($name, $vars=array(), $layout='store') {
 	extract($vars);
 
 	ob_start();
@@ -218,7 +214,10 @@ function print_template($name, $vars=array(), $layout='admin') {
 	$page_content = ob_get_contents();
 	ob_end_clean();
 
-	require 'templates/layouts/' . $layout . '.php';
+	if ( $layout ) {
+		require 'templates/layouts/' . $layout . '.php';
+	}
+	else {
+		echo $page_content;
+	}
 }
-
-// Now print the opening HTML...
