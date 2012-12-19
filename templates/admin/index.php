@@ -1,5 +1,7 @@
 
 <div class="page-header">
-	<h1>Hello, <?= $admin_name ?>!</h1>
+	<h1>Welcome to the Dolphinitively Tees Dashboard!</h1>
 </div>
+
+<p><?= $motd ?></p>
 

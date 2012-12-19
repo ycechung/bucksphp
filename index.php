@@ -16,6 +16,7 @@ while ( $row = $result->fetch_assoc() ) {
 	$products[] = $row;
 }
 
+// Print the index template
 print_template('index', array(
 	'products' => $products
 ));

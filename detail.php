@@ -12,6 +12,7 @@ if ( !isset($_GET['id']) || !$product = get_product($_GET['id']) ) {
 	exit;
 }
 
+// Print the detail template
 print_template('detail', array(
 	'product' => $product
 ));

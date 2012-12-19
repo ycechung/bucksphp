@@ -104,5 +104,3 @@ elseif ( $action == 'thank' ) {
 print_template('view_cart', array(
 	'action' => $action
 ));
-
-?>

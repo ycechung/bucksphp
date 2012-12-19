@@ -206,18 +206,46 @@ function get_product($id) {
 	}
 }
 
-function print_template($name, $vars=array(), $layout='store') {
+/**
+ * Render a template file
+ *
+ * @param string $__template - The path to the template file (relative to the templates directory)
+ * @param array $vars - (optional) An array of variables to pass into the template
+ * @param string $__layout - (optional) The layout file to use (from templates/layouts). Defaults to "store".
+ * @return void
+ **/
+function print_template($__template, $vars=array(), $__layout='store') {
 	extract($vars);
 
 	ob_start();
-	require 'templates/' . $name . '.php';
+	require 'templates/' . $__template . '.php';
 	$page_content = ob_get_contents();
 	ob_end_clean();
 
-	if ( $layout ) {
-		require 'templates/layouts/' . $layout . '.php';
+	if ( $__layout ) {
+		require 'templates/layouts/' . $__layout . '.php';
 	}
 	else {
 		echo $page_content;
+	}
+}
+
+/**
+ * Quote and escape a string destined for the database
+ *
+ * @param string $str
+ * @return string
+ **/
+function qstr($str) {
+	// use the global MySQL connection
+	global $db;
+
+	// if the string is null, use the MySQL NULL constant
+	if ( is_null($str) ) {
+		return 'NULL';
+	}
+	// otherwise, double quote the string and escape any bad characters
+	else {
+		return '"' . $db->real_escape_string($str) . '"';
 	}
 }

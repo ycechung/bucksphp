@@ -2,6 +2,7 @@
 	<h1><?= h($page_title) ?></h1>
 </div>
 
+<?php // if an error is set, print it ?>
 <?php if ( isset($error) ): ?>
 	<div class="alert alert-error"><?= h($error) ?></div>
 <?php endif; ?>

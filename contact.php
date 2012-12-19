@@ -55,6 +55,7 @@ elseif ( isset($_GET['action']) && $_GET['action'] == 'send' ) {
   }
 }
 
+// Print the contact template
 print_template('contact', array(
   'alert' => (isset($alert) ? $alert : null)
 ));
