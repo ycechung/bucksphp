@@ -24,7 +24,7 @@
 		  <div class="navbar-inner">
 		    <a class="brand" href="index.php">Dolphinitively Dashboard</a>
 		    <ul class="nav">
-		      <li class="products"><a href="products.php">Products</a></li>
+		      <li class="products <?= tab_class('products') ?>"><a href="products.php">Products</a></li>
 		      <li class="pages"><a href="pages.php">Pages</a></li>
 		    </ul>
 		  </div>
