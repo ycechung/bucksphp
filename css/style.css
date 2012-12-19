@@ -33,3 +33,7 @@ body {
 #paypal-checkout-form {
   margin-top: -50px;
 }
+
+#products-table img.thumbnail {
+  width: 100px;
+}
