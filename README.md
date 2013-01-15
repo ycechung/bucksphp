@@ -4,7 +4,7 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 
 > You will learn all of the steps to build a product website for a business, using open-source tools that are robust, reliable and free. You will learn how to set up a database, build forms to maintain contents, and build interactive pages that make it easy for your customers to find your products. The code and techniques used here are equally useful for companies with many products, as well as artisans, craftspeople, small retailers, and others with just a few products. They can also be used to create dynamic websites allowing user logins, personalization, processing of forms and email, and much more. Bring a 2 Gig flash drive to class.
 >
-> **Prerequisite:** The HTML, XHTML & CSS course (WCOSY 6019) OR a general understanding of programming is suggested. 
+> **Prerequisite:** The HTML, XHTML & CSS course (WCOSY 6019) OR a general understanding of programming is suggested.
 
 ## Class notes, resources, and assignments
 
@@ -16,6 +16,7 @@ This is the source code for *[Creating a Dynamic Website with PHP and MySQL](htt
 * [Week 5](https://github.com/bucksphp/bucksphp/wiki/Week-5) (12/4)
 * [Week 6](https://github.com/bucksphp/bucksphp/wiki/Week-6) (12/11)
 * [Week 7](https://github.com/bucksphp/bucksphp/wiki/Week-7) (12/18)
+* [Week 8](https://github.com/bucksphp/bucksphp/wiki/Week-8) (1/15)
 
 ---
 If you have any questions or comments, please don't hesitate to email ken@37i.net.
