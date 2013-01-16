@@ -28,6 +28,7 @@
 					<td>
 						<a class="btn btn-small" href="products.php?action=edit&amp;id=<?= $product['id'] ?>">Edit</a>
 						<a class="btn btn-small btn-danger" href="products.php?action=delete&amp;id=<?= $product['id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
+						<a class="btn btn-small btn-info" href="sizes.php?product_id=<?= $product['id'] ?>">Sizes</a>
 					</td>
 				</tr>
 			<?php endforeach; ?>
