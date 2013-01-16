@@ -19,7 +19,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 
 	</head>
-	<body>
+	<body class="admin">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 		  <div class="navbar-inner">
 		    <a class="brand" href="index.php">Dolphinitively Dashboard</a>

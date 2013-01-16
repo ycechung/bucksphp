@@ -2,3 +2,10 @@
     Order Allow,Deny
     Deny from all
 </FilesMatch>
+
+RewriteEngine On
+RewriteRule ^about$ /bucksphp/page.php?id=5 [L]
+RewriteRule ^terms$ /bucksphp/page.php?id=4 [L]
+RewriteRule ^privacy$ /bucksphp/page.php?id=6 [L]
+RewriteRule ^shipping$ /bucksphp/page.php?id=2 [L]
+RewriteRule ^returns$ /bucksphp/page.php?id=7 [L]

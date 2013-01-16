@@ -7,7 +7,7 @@
 	<div class="alert alert-error"><?= h($error) ?></div>
 <?php endif; ?>
 
-<form id="product-form" action="products.php?action=create" class="form-horizontal" method="post">
+<form id="product-form" action="products.php?action=create" class="form-horizontal" method="post" enctype="multipart/form-data">
   <div class="control-group">
     <label class="control-label" for="name">Name</label>
     <div class="controls">
@@ -24,6 +24,12 @@
     <label class="control-label" for="image">Picture URL</label>
     <div class="controls">
       <input type="text" name="image" id="image" placeholder="Picture URL" value="">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="image_file">Picture File</label>
+    <div class="controls">
+      <input type="file" name="image_file" id="image_file">
     </div>
   </div>
   <div class="control-group">

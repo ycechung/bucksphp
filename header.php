@@ -66,7 +66,7 @@ function product_image_tag($product, $class='') {
  * @return string
  **/
 function tab_class($tab) {
-	if ( basename($_SERVER['PHP_SELF'], '.php') == $tab ) {
+	if ( basename($_SERVER['PHP_SELF'], '.php') == $tab || strstr($_SERVER["REQUEST_URI"], $tab) ) {
 		return 'active';
 	}
 	else {

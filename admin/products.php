@@ -37,6 +37,15 @@ elseif ( $action == 'create' ) {
 		die;
 	}
 
+	if ( is_uploaded_file($_FILES['image_file']['tmp_name']) ) {
+		$upload_dir = 'C:/xampp/htdocs/bucksphp/img/products/';
+		$upload_file = $upload_dir . $_FILES['image_file']['name'];
+		
+		if ( move_uploaded_file($_FILES['image_file']['tmp_name'], $upload_file) ) {
+			$_POST['image'] = '/bucksphp/img/products/' .  $_FILES['image_file']['name'];
+		}
+	}
+
 	// sanitize all POST input
 	$safe = array();
 
@@ -104,6 +113,15 @@ elseif ( $action == 'update' ) {
 			'product' => $_POST,
 		), 'admin');
 		die;
+	}
+
+	if ( is_uploaded_file($_FILES['image_file']['tmp_name']) ) {
+		$upload_dir = 'C:/xampp/htdocs/bucksphp/img/products/';
+		$upload_file = $upload_dir . $_FILES['image_file']['name'];
+		
+		if ( move_uploaded_file($_FILES['image_file']['tmp_name'], $upload_file) ) {
+			$_POST['image'] = '/bucksphp/img/products/' .  $_FILES['image_file']['name'];
+		}
 	}
 
 	// sanitize all POST input

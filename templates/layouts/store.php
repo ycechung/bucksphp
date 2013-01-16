@@ -43,7 +43,7 @@
 		    	<?php // Give the current tab the class "active", so we can highlight it with CSS ?>
 		      <li class="index <?= tab_class('index') ?>"><a href="index.php">Home</a></li>
 		      <li class="contact <?= tab_class('contact') ?>"><a href="contact.php">Contact</a></li>
-		      <li class="about <?= tab_class('about') ?>"><a href="page.php?id=1">About Us</a></li>
+		      <li class="about <?= tab_class('about') ?>"><a href="about">About Us</a></li>
 		      <li class="cart <?= tab_class('cart') ?>">
 		      	<a href="cart.php">
 		      		Shopping Cart
@@ -63,5 +63,14 @@
 		<div class="container">
 			<?= $page_content ?>
 		</div>
+		<footer id="footer" class="muted">
+			<div class="container">
+				&copy; <?= date('Y') ?> Dolphinitively Tees, LLC
+				<a href="terms">Terms of Service</a>
+				<a href="privacy">Privacy Policy</a>
+				<a href="shipping">Shipping Info</a>
+				<a href="returns">Returns</a>
+			</div>
+		</footer>
 	</body>
 </html>
