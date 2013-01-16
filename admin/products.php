@@ -37,6 +37,7 @@ elseif ( $action == 'create' ) {
 		die;
 	}
 
+	// handle file upload
 	if ( is_uploaded_file($_FILES['image_file']['tmp_name']) ) {
 		$upload_dir = 'C:/xampp/htdocs/bucksphp/img/products/';
 		$upload_file = $upload_dir . $_FILES['image_file']['name'];
@@ -115,6 +116,7 @@ elseif ( $action == 'update' ) {
 		die;
 	}
 
+	// handle file upload
 	if ( is_uploaded_file($_FILES['image_file']['tmp_name']) ) {
 		$upload_dir = 'C:/xampp/htdocs/bucksphp/img/products/';
 		$upload_file = $upload_dir . $_FILES['image_file']['name'];

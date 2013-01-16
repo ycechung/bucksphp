@@ -14,6 +14,7 @@ if ( $action == 'new' ) {
 		'page_title' => 'New Page'
 	), 'admin');
 }
+// create a page record
 elseif ( $action == 'create' ) {
 	// set an error if required fields are missing
 	$reqs = array('title', 'body');
@@ -59,6 +60,7 @@ elseif ( $action == 'create' ) {
 	header('Location: pages.php');
 	exit;
 }
+// show the edit page form
 elseif ( $action == 'edit' ) {
 	// if the id param is missing, redirect to the index page
 	if ( !isset($_GET['id']) ) {
@@ -76,6 +78,7 @@ elseif ( $action == 'edit' ) {
 		'page' => $page,
 	), 'admin');
 }
+// update a page record
 elseif ( $action == 'update' ) {
 	// if the id param is missing, redirect to the index page
 	if ( !isset($_POST['id']) ) {
@@ -126,6 +129,7 @@ elseif ( $action == 'update' ) {
 	header('Location: pages.php');
 	exit;
 }
+// delete a page record
 elseif ( $action == 'delete' ) {
 	// if the id param is missing, redirect to the index page
 	if ( !isset($_GET['id']) ) {
@@ -149,27 +153,32 @@ elseif ( $action == 'delete' ) {
 	header('Location: pages.php');
 	exit;
 }
+// show details about a single page
 elseif ( $action == 'show' ) {
-		// if the id param is missing, redirect to the index page
+	// if the id param is missing, redirect to the index page
 	if ( !isset($_GET['id']) ) {
 		header('Location: pages.php');
 		die;
 	}
 
+	// select a single page record from the database
 	$sql = 'SELECT * FROM pages WHERE id = ' . qstr($_GET['id']);
 	$result = $db->query($sql);
 	$page = $result->fetch_assoc();
 
+	// print the show template
 	print_template('admin/pages/show', array(
 		'page' => $page,
 		'page_title' => 'Page: ' . $page['title']
 	), 'admin');
 }
+// pages index
 else {
 	// select all pages sorted by title
 	$sql = "SELECT * FROM pages ORDER BY title";
 	$result = $db->query($sql);
 
+	// create an array of page records
 	$pages = array();
 
 	while ( $row = $result->fetch_assoc() ) {

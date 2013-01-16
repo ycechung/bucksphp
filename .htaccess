@@ -3,6 +3,7 @@
     Deny from all
 </FilesMatch>
 
+# Create friendly URLs for page records
 RewriteEngine On
 RewriteRule ^about$ /bucksphp/page.php?id=5 [L]
 RewriteRule ^terms$ /bucksphp/page.php?id=4 [L]
