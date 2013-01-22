@@ -22,7 +22,7 @@
 		<tbody>
 			<?php foreach ( $sizes as $size ): ?>
 				<tr>
-					<td><a href="sizes.php?id=<?= $size['id'] ?>&amp;action=show&amp;product_id=<?= h($product['id']) ?>"><?= h($size['name']) ?></a></td>
+					<td><a href="sizes.php?id=<?= h($size['id']) ?>&amp;action=show&amp;product_id=<?= h($product['id']) ?>"><?= h($size['name']) ?></a></td>
 					<td><?= number_format($size['price_difference'], 2) ?></td>
 					<td><?= h($size['weight']) ?></td>
 					<td>
