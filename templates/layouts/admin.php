@@ -25,7 +25,7 @@
 		    <a class="brand" href="index.php">Dolphinitively Dashboard</a>
 		    <ul class="nav">
 		      <li class="products <?= tab_class('products') ?>"><a href="products.php">Products</a></li>
-		      <li class="pages"><a href="pages.php">Pages</a></li>
+		      <li class="pages  <?= tab_class('pages') ?>"><a href="pages.php">Pages</a></li>
 		    </ul>
 		  </div>
 		</div>

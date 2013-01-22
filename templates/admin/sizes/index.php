@@ -24,6 +24,7 @@
 				<tr>
 					<td><a href="sizes.php?id=<?= $size['id'] ?>&amp;action=show&amp;product_id=<?= h($product['id']) ?>"><?= h($size['name']) ?></a></td>
 					<td><?= number_format($size['price_difference'], 2) ?></td>
+					<td><?= h($size['weight']) ?></td>
 					<td>
 						<a class="btn btn-small" href="sizes.php?action=edit&amp;id=<?= $size['id'] ?>&amp;product_id=<?= h($product['id']) ?>">Edit</a>
 						<a class="btn btn-small btn-danger" href="sizes.php?action=delete&amp;id=<?= $size['id'] ?>&amp;product_id=<?= h($product['id']) ?>" onclick="return confirm('Are you sure?')">Delete</a>

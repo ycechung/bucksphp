@@ -13,7 +13,6 @@
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th></th>
 				<th>Title</th>
 				<th></th>
 			</tr>
