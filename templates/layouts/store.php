@@ -53,9 +53,15 @@
 		      		<?php endif; ?>
 		      	</a>
 		     </li>
+		    </ul>
+		    <ul class="nav pull-right session">
 		     <?php // Only show the logout link if a user is logged in ?>
 		     <?php if ( isset($_SESSION['user']) ): ?>
-		     	<li class="logout pull-right"><a href="logout.php">Log out</a></li>
+		     	<li class="profile"><a href="profile.php"><?= h($_SESSION['user']['name']) ?></a></li>
+		     	<li class="logout"><a href="logout.php">Log out</a></li>
+		     <?php else: ?>
+		     	<li class="login"><a href="login.php">Log in</a></li>
+		     	<li class="signup"><a href="signup.php">Sign up</a></li>
 		     <?php endif; ?>
 		    </ul>
 		  </div>
