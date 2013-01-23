@@ -26,3 +26,6 @@
     </div>
   </div>
 </form>
+
+<p>Not signed up yet? <a href="signup.php">Register now!</a></p>
+<p>Forgot your password? <a href="reset_password.php">Reset it.</a></p>

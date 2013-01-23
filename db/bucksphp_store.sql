@@ -3,12 +3,18 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2013 at 02:44 AM
+-- Generation Time: Jan 23, 2013 at 03:30 AM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `bucksphp_store`
@@ -265,3 +271,34 @@ INSERT INTO `sizes` (`id`, `name`, `price_difference`, `product_id`, `weight`, `
 (144, 'Medium', 0.00, 36, 200, '2012-12-10 06:05:41'),
 (145, 'Large', 0.00, 36, 300, '2012-12-10 06:05:41'),
 (146, 'XL', 0.00, 36, 400, '2012-12-10 06:05:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `shipping_address` text COLLATE utf8_unicode_ci,
+  `billing_address` text COLLATE utf8_unicode_ci,
+  `locale` varchar(6) COLLATE utf8_unicode_ci NOT NULL,
+  `password_reset_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `shipping_address`, `billing_address`, `locale`, `password_reset_token`) VALUES
+(2, 'Charles McMann', 'c.mccman@gmail.com', '$2a$08$D/BrZd1jAnlKyaWphzTW.uzXsKd3b2i5M3xygj9yHAk.recvecSWC', '2013-01-23 00:37:14', NULL, NULL, '', ''),
+(3, 'Buck Php', 'bucksphp@gmail.com', '$2a$08$avn0qn.xUJBjc9S6lCvE1uJgGZuQ70OCibKdTVPHlsL/8LPQhzSfi', '2013-01-23 00:54:47', '', '8750 New Falls Rd\r\nLevittown, PA 19057', '', NULL);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

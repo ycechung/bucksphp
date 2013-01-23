@@ -1,5 +1,6 @@
 <div class="page-header">
 	<a href="profile.php?action=edit" class="btn btn-primary pull-right">Edit Profile</a>
+	<a href="profile.php?action=edit_password" class="btn pull-right">Change Password</a>
 	<h1><?= h($page_title) ?></h1>
 </div>
 

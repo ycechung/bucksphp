@@ -38,3 +38,5 @@
     </div>
   </div>
 </form>
+
+<p>Already signed up? <a href="login.php">Login now!</a></p>
