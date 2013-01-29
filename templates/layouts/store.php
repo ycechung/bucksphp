@@ -54,6 +54,9 @@
 		      	</a>
 		     </li>
 		    </ul>
+		    <form class="navbar-search pull-left" action="index.php">
+		      <input type="text" class="search-query" name="q" placeholder="Search" value="<?= isset($_GET['q']) ? h($_GET['q']) : '' ?>">
+		    </form>
 		    <ul class="nav pull-right session">
 		     <?php // Only show the logout link if a user is logged in ?>
 		     <?php if ( isset($_SESSION['user']) ): ?>
