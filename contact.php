@@ -3,6 +3,9 @@
 // include header HTML and functions
 require 'header.php';
 
+// include swift mailer
+require_once INCLUDES_DIR . 'swift/swift_required.php';
+
 // if ?action=thank is in the URL, set a thank you alert
 if ( isset($_GET['action']) && $_GET['action'] == 'thank' ) {
   $alert = '<div class="alert alert-success">Thanks for your message!</div>';
@@ -29,22 +32,29 @@ elseif ( isset($_GET['action']) && $_GET['action'] == 'send' ) {
 
   // if no error has been set
   if ( !isset($alert) ) {
+    $transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+      ->setUsername(GMAIL_USERNAME)
+      ->setPassword(GMAIL_PASSWORD);
+
     // send the message to this address
     $to = 'bucksphp@gmail.com';
 
     // email subject
     $subject = 'BucksPHP Contact Form Message';
 
-    // email body
-    $message = $_POST['message'];
-
-    // the from address (From: Some Body <some.body@bucksphp.com>)
-    // We need to make sure that no malicious spam headers have been sent through our form. To do this,
-    // we pass all input through the sanitize_mail_headers function defined in header.php
-    $headers = 'From: ' . sanitize_mail_headers($_POST['name']) . ' <' . sanitize_mail_headers($_POST['email']) . '>';
+    // Create the message
+    $message = Swift_Message::newInstance($transporter)
+      // Give the message a subject
+      ->setSubject($subject)
+      // Set the From address with an associative array
+      ->setFrom(array($_POST['email'] => $_POST['name']))
+      // Set the To addresses with an associative array
+      ->setTo(array($to))
+      // Give it a body
+      ->setBody($_POST['message']);
 
     // Sent the email. If it works, redirect to the current page with ?action=thank in the URL
-    if ( mail($to, $subject, $message, $headers) ) {
+    if ( $message ) {
       header("Location: " . $_SERVER['PHP_SELF'] . '?action=thank');
       exit; // stop the script from continuing to execute after redirect
     }

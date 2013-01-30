@@ -1,10 +1,12 @@
 <?php
 
+define("INCLUDES_DIR", realpath(dirname(__FILE__)) . '/includes/');
+
 // environment-specific and sensitive information goes here
 require realpath(dirname(__FILE__)) . '/config.php';
 
 // include database wrapper
-require realpath(dirname(__FILE__)) . '/includes/DB.php';
+require INCLUDES_DIR . 'DB.php';
 
 // connect to the mysql server
 try {
