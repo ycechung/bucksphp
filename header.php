@@ -3,13 +3,16 @@
 // environment-specific and sensitive information goes here
 require realpath(dirname(__FILE__)) . '/config.php';
 
-// connect to the mysql server
-$db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+// include database wrapper
+require realpath(dirname(__FILE__)) . '/includes/DB.php';
 
-// if the connection fails, an error message will be set
-// check for that error message and kill the script if it exists
-if ( $db->connect_errno ) {
-	die("Failed to connect to database: " . $db->connect_error);
+// connect to the mysql server
+try {
+	$db = new DB(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+}
+catch ( Exception $ex ) {
+	error_log("Database connection failed: " . $ex->getMessage());
+	die("Everything went wrong! Sorry :(");
 }
 
 // Start up session handling
@@ -178,22 +181,19 @@ function get_product($id) {
 	global $db;
 
 	// select the product row from the database, *making sure to escape the data with real_escape_string() before we send it to MySQL*
-	$sql = 'SELECT * FROM products WHERE id = "' . $db->real_escape_string($id) . '"';
-	$result = $db->query($sql);
+	$sql = 'SELECT * FROM products WHERE id = ' . $db->escape($id);
 
-	// continue if rows are found
-	if ( $result->num_rows > 0 ) {
-		// store the product record in an associative array
-		$product = $result->fetch_assoc();
+	if ( $product = $db->selectOne($sql) ) {
 		// add an empty sizes array to the product
 		$product['sizes'] = array();
 
 		// select all sizes for this product, ordering them by their weight attribute
-		$sql = 'SELECT * FROM sizes WHERE product_id = "' . $db->real_escape_string($id) . '" ORDER BY weight';
-		$result = $db->query($sql);
+		$sql = 'SELECT * FROM sizes WHERE product_id = ' . $db->escape($id) . ' ORDER BY weight';
+
+		$sizes = $db->selectAll($sql);
 
 		// add each size to the product's sizes array in the format we expect (Small => 0.00, 2XL => 1.00, etc.)
-		while ( $size = $result->fetch_assoc() ) {
+		foreach ( $sizes as $size ) {
 			$product['sizes'][$size['name']] = $size['price_difference'];
 		}
 
@@ -240,12 +240,5 @@ function qstr($str) {
 	// use the global MySQL connection
 	global $db;
 
-	// if the string is null, use the MySQL NULL constant
-	if ( is_null($str) ) {
-		return 'NULL';
-	}
-	// otherwise, double quote the string and escape any bad characters
-	else {
-		return '"' . $db->real_escape_string($str) . '"';
-	}
+	return $db->escape($str);
 }

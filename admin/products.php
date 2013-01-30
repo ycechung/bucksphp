@@ -200,17 +200,7 @@ elseif ( $action == 'show' ) {
 // Read
 else {
 	// select all products sorted by name
-	$sql = "SELECT * FROM products ORDER BY name";
-	$result = $db->query($sql);
-
-	// create an array to hold the products
-	$products = array();
-
-	// store each product record in an associative array called $row
-	while ( $row = $result->fetch_assoc() ) {
-		// add the $row to the products array
-		$products[] = $row;
-	}
+	$products = $db->selectAll("SELECT * FROM products ORDER BY name");
 
 	// print the product index page
 	print_template('admin/products/index', array(

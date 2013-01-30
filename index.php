@@ -24,9 +24,7 @@ else {
 }
 
 // get page count for the current query
-$sql = "SELECT COUNT(*) AS count FROM products " . $where;
-$result = $db->query($sql);
-$row = $result->fetch_assoc();
+$row = $db->selectOne("SELECT COUNT(*) AS count FROM products " . $where);
 $product_count = $row['count'];
 $page_count = ceil($product_count / $per_page);
 
@@ -55,17 +53,7 @@ else {
 $start = ($current_page - 1) * $per_page;
 
 // select products sorted by name
-$sql = "SELECT * FROM products " . $where . " ORDER BY name LIMIT " . (int)$start . ", " . (int)$per_page;
-$result = $db->query($sql);
-
-// create an array to hold the products
-$products = array();
-
-// store each product record in an associative array called $row
-while ( $row = $result->fetch_assoc() ) {
-	// add the $row to the products array
-	$products[] = $row;
-}
+$products = $db->selectAll("SELECT * FROM products " . $where . " ORDER BY name LIMIT " . (int)$start . ", " . (int)$per_page);
 
 // Print the index template
 print_template('index', array(
